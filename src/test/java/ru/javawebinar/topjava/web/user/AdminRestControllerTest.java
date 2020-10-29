@@ -15,7 +15,6 @@ import ru.javawebinar.topjava.util.exception.NotFoundException;
 import ru.javawebinar.topjava.web.AbstractControllerTest;
 import ru.javawebinar.topjava.web.json.JsonUtil;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -143,7 +142,7 @@ class AdminRestControllerTest extends AbstractControllerTest {
 
     @Test
     void createInvalid() throws Exception {
-        User expected = new User(null, null, "", "newPass", 7300, Role.USER, Role.ADMIN);
+        User expected = new User(null, null, "", "newPass", "0509876543", Role.USER, Role.ADMIN);
         perform(MockMvcRequestBuilders.post(REST_URL)
                 .contentType(MediaType.APPLICATION_JSON)
                 .with(userHttpBasic(ADMIN))
@@ -185,7 +184,7 @@ class AdminRestControllerTest extends AbstractControllerTest {
     @Test
     @Transactional(propagation = Propagation.NEVER)
     void createDuplicate() throws Exception {
-        User expected = new User(null, "New", "user@yandex.ru", "newPass", 2300, Role.USER, Role.ADMIN);
+        User expected = new User(null, "New", "user@yandex.ru", "newPass", "1234567890", Role.USER, Role.ADMIN);
         perform(MockMvcRequestBuilders.post(REST_URL)
                 .contentType(MediaType.APPLICATION_JSON)
                 .with(userHttpBasic(ADMIN))

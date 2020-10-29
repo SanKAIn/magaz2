@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
-import ru.javawebinar.topjava.Profiles;
 import ru.javawebinar.topjava.model.AbstractBaseEntity;
 import ru.javawebinar.topjava.model.User;
 import ru.javawebinar.topjava.service.UserService;
@@ -33,7 +32,7 @@ public abstract class AbstractUserController {
     @Autowired
     @SuppressWarnings("deprecation")
     public void setEnvironment(Environment environment) {
-        modificationRestriction = environment.acceptsProfiles(Profiles.HEROKU);
+        //modificationRestriction = environment.acceptsProfiles(Profiles.POSTGRES_DB);
     }
 
     @InitBinder

@@ -55,6 +55,9 @@ $(function () {
                         }
                     },
                     {
+                        "data": "phone"
+                    },
+                    {
                         "orderable": false,
                         "defaultContent": "",
                         "render": renderEditBtn

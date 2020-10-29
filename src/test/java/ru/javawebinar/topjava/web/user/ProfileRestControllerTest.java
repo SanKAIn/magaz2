@@ -54,7 +54,7 @@ class ProfileRestControllerTest extends AbstractControllerTest {
 
     @Test
     void register() throws Exception {
-        UserTo newTo = new UserTo(null, "newName", "newemail@ya.ru", "newPassword", 1500);
+        UserTo newTo = new UserTo(null, "newName", "newemail@ya.ru", "newPassword", "1236547890");
         User newUser = UserUtil.createNewFromTo(newTo);
         ResultActions action = perform(MockMvcRequestBuilders.post(REST_URL + "/register")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -71,7 +71,7 @@ class ProfileRestControllerTest extends AbstractControllerTest {
 
     @Test
     void update() throws Exception {
-        UserTo updatedTo = new UserTo(null, "newName", "newemail@ya.ru", "newPassword", 1500);
+        UserTo updatedTo = new UserTo(null, "newName", "newemail@ya.ru", "newPassword", "1234569870");
         perform(MockMvcRequestBuilders.put(REST_URL).contentType(MediaType.APPLICATION_JSON)
                 .with(userHttpBasic(USER))
                 .content(JsonUtil.writeValue(updatedTo)))
@@ -83,7 +83,7 @@ class ProfileRestControllerTest extends AbstractControllerTest {
 
     @Test
     void updateInvalid() throws Exception {
-        UserTo updatedTo = new UserTo(null, null, "password", null, 1500);
+        UserTo updatedTo = new UserTo(null, null, "password", null, "1500");
         perform(MockMvcRequestBuilders.put(REST_URL)
                 .contentType(MediaType.APPLICATION_JSON)
                 .with(userHttpBasic(USER))
@@ -97,7 +97,7 @@ class ProfileRestControllerTest extends AbstractControllerTest {
     @Test
     @Transactional(propagation = Propagation.NEVER)
     void updateDuplicate() throws Exception {
-        UserTo updatedTo = new UserTo(null, "newName", "admin@gmail.com", "newPassword", 1500);
+        UserTo updatedTo = new UserTo(null, "newName", "admin@gmail.com", "newPassword", "0123456789");
 
         perform(MockMvcRequestBuilders.put(REST_URL).contentType(MediaType.APPLICATION_JSON)
                 .with(userHttpBasic(USER))

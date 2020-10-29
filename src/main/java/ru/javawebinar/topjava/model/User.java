@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.validator.constraints.Range;
 import org.hibernate.validator.constraints.SafeHtml;
 import org.springframework.util.CollectionUtils;
 import ru.javawebinar.topjava.HasIdAndEmail;
@@ -16,8 +15,6 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.*;
-
-import static ru.javawebinar.topjava.util.UserUtil.DEFAULT_CALORIES_PER_DAY;
 
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @NamedQueries({
@@ -65,9 +62,9 @@ public class User extends AbstractNamedEntity implements HasIdAndEmail {
     @BatchSize(size = 200)
     private Set<Role> roles;
 
-    @Column(name = "calories_per_day", nullable = false, columnDefinition = "int default 2000")
-    @Range(min = 10, max = 10000)
-    private int caloriesPerDay = DEFAULT_CALORIES_PER_DAY;
+    @Column(name = "phone", nullable = false)
+    @Size(min = 10, max = 13)
+    private String phone;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")//, cascade = CascadeType.REMOVE, orphanRemoval = true)
     @OrderBy("dateTime DESC")
@@ -78,18 +75,18 @@ public class User extends AbstractNamedEntity implements HasIdAndEmail {
     }
 
     public User(User u) {
-        this(u.getId(), u.getName(), u.getEmail(), u.getPassword(), u.getCaloriesPerDay(), u.isEnabled(), u.getRegistered(), u.getRoles());
+        this(u.getId(), u.getName(), u.getEmail(), u.getPassword(), u.getPhone(), u.isEnabled(), u.getRegistered(), u.getRoles());
     }
 
-    public User(Integer id, String name, String email, String password, int caloriesPerDay, Role role, Role... roles) {
-        this(id, name, email, password, caloriesPerDay, true, new Date(), EnumSet.of(role, roles));
+    public User(Integer id, String name, String email, String password, String phone, Role role, Role... roles) {
+        this(id, name, email, password, phone, true, new Date(), EnumSet.of(role, roles));
     }
 
-    public User(Integer id, String name, String email, String password, int caloriesPerDay, boolean enabled, Date registered, Collection<Role> roles) {
+    public User(Integer id, String name, String email, String password, String phone, boolean enabled, Date registered, Collection<Role> roles) {
         super(id, name);
         this.email = email;
         this.password = password;
-        this.caloriesPerDay = caloriesPerDay;
+        this.phone = phone;
         this.enabled = enabled;
         this.registered = registered;
         setRoles(roles);
@@ -120,14 +117,6 @@ public class User extends AbstractNamedEntity implements HasIdAndEmail {
         this.enabled = enabled;
     }
 
-    public int getCaloriesPerDay() {
-        return caloriesPerDay;
-    }
-
-    public void setCaloriesPerDay(int caloriesPerDay) {
-        this.caloriesPerDay = caloriesPerDay;
-    }
-
     public boolean isEnabled() {
         return enabled;
     }
@@ -144,6 +133,14 @@ public class User extends AbstractNamedEntity implements HasIdAndEmail {
         this.roles = CollectionUtils.isEmpty(roles) ? EnumSet.noneOf(Role.class) : EnumSet.copyOf(roles);
     }
 
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
     public List<Meal> getMeals() {
         return meals;
     }
@@ -156,7 +153,7 @@ public class User extends AbstractNamedEntity implements HasIdAndEmail {
                 ", name=" + name +
                 ", enabled=" + enabled +
                 ", roles=" + roles +
-                ", caloriesPerDay=" + caloriesPerDay +
+                ", phone=" + phone +
                 '}';
     }
 }

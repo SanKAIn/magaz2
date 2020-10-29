@@ -22,7 +22,7 @@
                     <topjava:inputField labelCode="user.name" name="name"/>
                     <topjava:inputField labelCode="user.email" name="email"/>
                     <topjava:inputField labelCode="user.password" name="password" inputType="password"/>
-                    <topjava:inputField labelCode="user.caloriesPerDay" name="caloriesPerDay" inputType="number"/>
+                    <topjava:inputField labelCode="user.phone" name="phone"/>
 
                     <div class="text-right">
                         <a class="btn btn-secondary" href="#" onclick="window.history.back()">

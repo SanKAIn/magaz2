@@ -20,13 +20,13 @@ public class SpringMain {
     public static void main(String[] args) {
         // java 7 automatic resource management
         try (GenericXmlApplicationContext appCtx = new GenericXmlApplicationContext()) {
-            appCtx.getEnvironment().setActiveProfiles(Profiles.getActiveDbProfile(), Profiles.REPOSITORY_IMPLEMENTATION);
+            appCtx.getEnvironment().setActiveProfiles("postgres", "datajpa");
             appCtx.load("spring/inmemory.xml");
             appCtx.refresh();
 
             System.out.println("Bean definition names: " + Arrays.toString(appCtx.getBeanDefinitionNames()));
             AdminRestController adminUserController = appCtx.getBean(AdminRestController.class);
-            adminUserController.create(new User(null, "userName", "email@mail.ru", "password", 2000, Role.ADMIN));
+            adminUserController.create(new User(null, "userName", "email@mail.ru", "password", "2000", Role.ADMIN));
             System.out.println();
 
             mockAuthorize(USER);

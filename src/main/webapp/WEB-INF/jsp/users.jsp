@@ -25,6 +25,7 @@
                 <th><spring:message code="user.roles"/></th>
                 <th><spring:message code="user.active"/></th>
                 <th><spring:message code="user.registered"/></th>
+                <th><spring:message code="user.phone"/></th>
                 <th></th>
                 <th></th>
             </tr>

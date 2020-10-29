@@ -31,6 +31,6 @@ public class SecurityUtil {
     }
 
     public static int authUserCaloriesPerDay() {
-        return get().getUserTo().getCaloriesPerDay();
+        return 100;
     }
 }
