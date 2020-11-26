@@ -11,7 +11,7 @@
         <http-basic/>
         <intercept-url pattern="/rest/admin/**" access="hasRole('ADMIN')"/>
         <intercept-url pattern="/rest/profile/register" access="isAnonymous()"/>
-        <intercept-url pattern="/**" access="isAuthenticated()"/>
+<!--        <intercept-url pattern="/**" access="isAuthenticated()"/>-->
         <csrf disabled="true"/>
     </http>
 
@@ -19,14 +19,17 @@
 
     <http>
         <intercept-url pattern="/login" access="permitAll()"/>
+        <intercept-url pattern="/details" access="permitAll()"/>
+        <intercept-url pattern="/all" access="permitAll()"/>
         <intercept-url pattern="/profile/register" access="isAnonymous()"/>
 
         <intercept-url pattern="/**/admin/**" access="hasRole('ADMIN')"/>
-        <intercept-url pattern="/**" access="isAuthenticated()"/>
+<!--        <intercept-url pattern="/**" access="isAuthenticated()"/>-->
 
-        <form-login login-page="/login" default-target-url="/meals"
+        <form-login login-page="/login" default-target-url="/details"
                     authentication-failure-url="/login?error=true"
                     login-processing-url="/spring_security_check"/>
+
         <logout logout-success-url="/login"/>
         <!--<csrf disabled="true"/>-->
     </http>

@@ -94,7 +94,4 @@ public class UserService implements UserDetailsService {
         return repository.save(prepareToSave(user, passwordEncoder));
     }
 
-    public User getWithMeals(int id) {
-        return checkNotFoundWithId(repository.getWithMeals(id), id);
-    }
 }

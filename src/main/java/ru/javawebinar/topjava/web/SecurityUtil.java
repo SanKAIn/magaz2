@@ -8,6 +8,8 @@ import static java.util.Objects.requireNonNull;
 
 public class SecurityUtil {
 
+    private static int NUMBER = 1;
+
     private SecurityUtil() {
     }
 
@@ -28,6 +30,13 @@ public class SecurityUtil {
 
     public static int authUserId() {
         return get().getUserTo().id();
+    }
+
+    public static int korzina(){
+        if (safeGet() == null)
+            return ++NUMBER;
+        else
+            return authUserId();
     }
 
     public static int authUserCaloriesPerDay() {

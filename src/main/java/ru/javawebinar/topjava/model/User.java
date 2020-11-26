@@ -14,7 +14,10 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.*;
+import java.util.Collection;
+import java.util.Date;
+import java.util.EnumSet;
+import java.util.Set;
 
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @NamedQueries({
@@ -66,10 +69,10 @@ public class User extends AbstractNamedEntity implements HasIdAndEmail {
     @Size(min = 10, max = 13)
     private String phone;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")//, cascade = CascadeType.REMOVE, orphanRemoval = true)
-    @OrderBy("dateTime DESC")
-//    @JsonIgnore
-    private List<Meal> meals;
+//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")//, cascade = CascadeType.REMOVE, orphanRemoval = true)
+//    @OrderBy("dateTime DESC")
+////    @JsonIgnore
+//    private List<Meal> meals;
 
     public User() {
     }
@@ -141,9 +144,9 @@ public class User extends AbstractNamedEntity implements HasIdAndEmail {
         this.phone = phone;
     }
 
-    public List<Meal> getMeals() {
-        return meals;
-    }
+//    public List<Meal> getMeals() {
+//        return meals;
+//    }
 
     @Override
     public String toString() {
